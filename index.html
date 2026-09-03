@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>HAYAH | حياه — كل ما يحتاجه بيتك وأسرتك</title>
+<meta name="description" content="حياه — متجر عائلي لكل ما يخص ملابسك، أدواتك المدرسية، إكسسواراتك، هداياك، ومستلزمات بيتك، في مكان واحد." />
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Marhey:wght@400;500;600;700&family=Almarai:wght@300;400;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<!-- ============================= NAVBAR ============================= -->
+<header class="navbar" id="navbar">
+  <div class="navbar__top">
+    <div class="navbar__inner container">
+      <button class="navbar__burger" id="burgerBtn" aria-label="فتح القائمة">
+        <span></span><span></span><span></span>
+      </button>
+
+      <a href="#/" class="logo" aria-label="حياه — الصفحة الرئيسية">
+        <span class="logo__mark">
+          <svg viewBox="0 0 60 60" class="logo__blob"><path d="M30 2C43 2 56 12 58 27C60 42 48 58 30 58C12 58 2 44 2 29C2 14 17 2 30 2Z"/></svg>
+          <span class="logo__initial">ح</span>
+        </span>
+        <span class="logo__word">
+          <span class="logo__ar">حياه</span>
+          <span class="logo__en">HAYAH</span>
+        </span>
+      </a>
+
+      <div class="navbar__search">
+        <i class="fa-solid fa-magnifying-glass"></i>
+        <input type="text" id="searchInput" placeholder="ابحثي عن منتج، فئة، أو ماركة…" />
+      </div>
+
+      <div class="navbar__actions">
+        <a href="#/track" class="navbar__icon-btn" title="تتبع طلبك">
+          <i class="fa-solid fa-truck-fast"></i>
+          <span class="navbar__icon-label">تتبع الطلب</span>
+        </a>
+        <button class="navbar__icon-btn" id="reviewsOpenBtn" title="آراء العملاء">
+          <i class="fa-solid fa-images"></i>
+          <span class="navbar__icon-label">آراء العملاء</span>
+        </button>
+        <a href="#/account" class="navbar__icon-btn" title="حسابي">
+          <i class="fa-regular fa-user"></i>
+          <span class="navbar__icon-label">حسابي</span>
+        </a>
+        <button class="navbar__icon-btn navbar__cart" id="cartToggle" title="السلة">
+          <i class="fa-solid fa-basket-shopping"></i>
+          <span class="navbar__icon-label">السلة</span>
+          <span class="cart-count" id="cartCount">0</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <nav class="navbar__categories" id="navCategories">
+    <div class="container navbar__categories-inner" id="navCategoriesInner">
+      <!-- category chips injected by main.js -->
+    </div>
+  </nav>
+</header>
+
+<!-- Mobile search (shown on small screens under navbar) -->
+<div class="mobile-search container">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="text" id="searchInputMobile" placeholder="ابحثي عن منتج…" />
+</div>
+
+<!-- ============================= MAIN ============================= -->
+<main id="app">
+
+  <!-- ---------- HOME VIEW ---------- -->
+  <div id="view-home" class="view">
+
+    <section class="hero">
+      <div class="hero__shape hero__shape--1"></div>
+      <div class="hero__shape hero__shape--2"></div>
+      <div class="hero__shape hero__shape--3"></div>
+      <div class="container hero__inner">
+        <div class="hero__text">
+          <span class="hero__eyebrow">أهلاً بيكِ في بيتك التاني</span>
+          <h1 class="hero__title">كل حاجة لبيتك<br><span>وأسرتك</span> في مكان واحد</h1>
+          <p class="hero__desc">ملابس، أدوات مدرسية — بجودة نقدر نضمنها، وأسعار تفرحك.</p>
+          <div class="hero__actions">
+            <a href="#/shop" class="btn btn--primary">تسوقي دلوقتي <i class="fa-solid fa-arrow-left"></i></a>
+            <a href="#/shop?filter=offers" class="btn btn--ghost">شوفي العروض</a>
+          </div>
+        </div>
+        <div class="hero__art" aria-hidden="true">
+          <div class="hero__card hero__card--a"><i class="fa-solid fa-shirt"></i></div>
+          <div class="hero__card hero__card--b"><i class="fa-solid fa-gift"></i></div>
+          <div class="hero__card hero__card--c"><i class="fa-solid fa-pen-fancy"></i></div>
+          <div class="hero__card hero__card--d"><i class="fa-solid fa-house-chimney"></i></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section categories-section">
+      <div class="container">
+        <div class="section__head">
+          <h2 class="section__title">تسوقي حسب الفئة</h2>
+          <p class="section__sub">كل اللي محتاجاه، مقسّم عشانك</p>
+        </div>
+        <div class="categories-grid" id="categoriesGrid">
+          <!-- injected -->
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="section-featured">
+      <div class="container">
+        <div class="section__head">
+          <h2 class="section__title">مختارات حياه</h2>
+          <a href="#/shop?filter=featured" class="section__link">شوفي الكل <i class="fa-solid fa-arrow-left"></i></a>
+        </div>
+        <div class="products-grid" id="featuredGrid"></div>
+      </div>
+    </section>
+
+    <section class="section section--tint" id="section-bestsellers">
+      <div class="container">
+        <div class="section__head">
+          <h2 class="section__title">الأكثر مبيعاً</h2>
+          <a href="#/shop?filter=bestseller" class="section__link">شوفي الكل <i class="fa-solid fa-arrow-left"></i></a>
+        </div>
+        <div class="products-grid" id="bestsellerGrid"></div>
+      </div>
+    </section>
+
+    <section class="section" id="section-newarrivals">
+      <div class="container">
+        <div class="section__head">
+          <h2 class="section__title">وصل حديثاً</h2>
+          <a href="#/shop?filter=new" class="section__link">شوفي الكل <i class="fa-solid fa-arrow-left"></i></a>
+        </div>
+        <div class="products-grid" id="newArrivalsGrid"></div>
+      </div>
+    </section>
+
+    <section class="promo-strip">
+      <div class="container promo-strip__inner">
+        <div class="promo-strip__item"><i class="fa-solid fa-truck"></i><span>شحن لكل المحافظات</span></div>
+        <div class="promo-strip__item"><i class="fa-solid fa-rotate-left"></i><span>استبدال خلال ١٤ يوم</span></div>
+        <div class="promo-strip__item"><i class="fa-solid fa-shield-heart"></i><span>دفع آمن وموثوق</span></div>
+        <div class="promo-strip__item"><i class="fa-solid fa-headset"></i><span>دعم عملاء يومياً</span></div>
+      </div>
+    </section>
+  </div>
+
+  <!-- ---------- SHOP / CATEGORY LISTING VIEW ---------- -->
+  <div id="view-shop" class="view" hidden>
+    <div class="container shop-layout">
+      <aside class="shop-filters">
+        <h3>الفئات</h3>
+        <ul id="shopCategoryList" class="shop-filters__list"></ul>
+      </aside>
+      <section class="shop-results">
+        <div class="shop-results__head">
+          <h1 id="shopTitle">كل المنتجات</h1>
+          <span id="shopCount" class="shop-results__count"></span>
+        </div>
+        <div class="products-grid" id="shopGrid"></div>
+        <div class="empty-state" id="shopEmpty" hidden>
+          <i class="fa-solid fa-basket-shopping"></i>
+          <h3>لا توجد منتجات هنا حالياً</h3>
+          <p>هنضيف منتجات جديدة قريب، تابعينا!</p>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <!-- ---------- PRODUCT DETAIL VIEW ---------- -->
+  <div id="view-product" class="view" hidden>
+    <div class="container product-page" id="productPageContent"></div>
+  </div>
+
+  <!-- ---------- ORDER TRACKING VIEW ---------- -->
+  <div id="view-track" class="view" hidden>
+    <div class="container track-page">
+      <h1>تتبعي طلبك</h1>
+      <p class="track-page__sub">اكتبي رقم الطلب اللي استلمتيه بعد إتمام الشراء</p>
+      <form class="track-form" id="trackForm">
+        <input type="text" id="trackOrderNumber" placeholder="مثال: HYH-20260901-0001" required />
+        <button type="submit" class="btn btn--primary">تتبع</button>
+      </form>
+      <div id="trackResult"></div>
+    </div>
+  </div>
+
+  <!-- ---------- CHECKOUT VIEW ---------- -->
+  <div id="view-checkout" class="view" hidden>
+    <div class="container checkout-page">
+      <h1>إتمام الطلب</h1>
+      <div class="checkout-layout">
+        <form class="checkout-form" id="checkoutForm">
+          <div class="checkout-form__section">
+            <h3>طريقة الاستلام</h3>
+            <div class="payment-options" id="deliveryMethodOptions">
+              <label class="payment-option">
+                <input type="radio" name="deliveryMethod" value="delivery" checked />
+                <span><i class="fa-solid fa-truck-fast"></i> توصيل لباب البيت</span>
+              </label>
+              <label class="payment-option">
+                <input type="radio" name="deliveryMethod" value="pickup" />
+                <span><i class="fa-solid fa-store"></i> استلام من المتجر</span>
+              </label>
+            </div>
+            <label id="governorateField">المحافظة
+              <select id="ckGovernorate" required></select>
+            </label>
+          </div>
+
+          <div class="checkout-form__section">
+            <h3>بيانات التوصيل</h3>
+            <label>الاسم بالكامل <input type="text" id="ckName" required /></label>
+            <label>رقم الموبايل <input type="tel" id="ckPhone" required placeholder="01xxxxxxxxx" /></label>
+            <label>المحافظة / المدينة <input type="text" id="ckCity" required /></label>
+            <label>العنوان بالتفصيل <textarea id="ckAddress" required rows="3"></textarea></label>
+            <label>ملاحظات (اختياري) <textarea id="ckNotes" rows="2"></textarea></label>
+          </div>
+
+          <div class="checkout-form__section">
+            <h3>طريقة الدفع</h3>
+            <div class="payment-options" id="paymentOptions">
+              <label class="payment-option">
+                <input type="radio" name="paymentMethod" value="vodafone_cash" checked />
+                <span><i class="fa-solid fa-mobile-screen"></i> فودافون كاش</span>
+              </label>
+              <label class="payment-option">
+                <input type="radio" name="paymentMethod" value="instapay" />
+                <span><i class="fa-solid fa-money-bill-transfer"></i> إنستاباي</span>
+              </label>
+            </div>
+            <p class="payment-instructions" id="paymentInstructions"></p>
+            <label>رقم العملية / كود التحويل <input type="text" id="ckPaymentRef" required placeholder="رقم العملية بعد التحويل" /></label>
+          </div>
+
+          <button type="submit" class="btn btn--primary btn--full">تأكيد الطلب</button>
+        </form>
+
+        <aside class="checkout-summary">
+          <h3>ملخص الطلب</h3>
+          <div id="checkoutItems" class="checkout-summary__items"></div>
+          <div class="checkout-summary__row"><span>الإجمالي الفرعي</span><span id="ckSubtotal">٠ ج.م</span></div>
+          <div class="checkout-summary__row"><span>الشحن</span><span id="ckShipping">٠ ج.م</span></div>
+          <div class="checkout-summary__row checkout-summary__row--total"><span>الإجمالي</span><span id="ckTotal">٠ ج.م</span></div>
+        </aside>
+      </div>
+    </div>
+  </div>
+
+  <!-- ---------- ORDER CONFIRMATION VIEW ---------- -->
+  <div id="view-confirmation" class="view" hidden>
+    <div class="container confirmation-page">
+      <div class="confirmation-icon"><i class="fa-solid fa-check"></i></div>
+      <h1>تم استلام طلبك بنجاح!</h1>
+      <p>رقم طلبك هو</p>
+      <div class="confirmation-number" id="confirmOrderNumber"></div>
+      <p class="confirmation-note">احتفظي بالرقم ده عشان تقدري تتابعي حالة طلبك في أي وقت.</p>
+      <div class="confirmation-actions">
+        <a href="#/track" class="btn btn--primary">تتبعي طلبك</a>
+        <a href="#/" class="btn btn--ghost">استمري في التسوق</a>
+      </div>
+    </div>
+  </div>
+
+</main>
+
+<!-- ============================= CUSTOMER REVIEWS MODAL ============================= -->
+<div class="reviews-overlay" id="reviewsOverlay"></div>
+<div class="reviews-modal" id="reviewsModal" role="dialog" aria-modal="true" aria-label="آراء العملاء">
+  <div class="reviews-modal__head">
+    <h3><i class="fa-solid fa-images"></i> آراء العملاء</h3>
+    <button class="reviews-modal__close" id="reviewsCloseBtn" aria-label="إغلاق"><i class="fa-solid fa-xmark"></i></button>
+  </div>
+  <div class="reviews-modal__body">
+    <div class="reviews-grid" id="reviewsGrid"></div>
+  </div>
+</div>
+
+<!-- Lightbox for enlarged review image -->
+<div class="lightbox-overlay" id="lightboxOverlay">
+  <button class="lightbox-close" id="lightboxCloseBtn" aria-label="إغلاق"><i class="fa-solid fa-xmark"></i></button>
+  <img src="" alt="رأي عميلة" id="lightboxImage" class="lightbox-image" />
+</div>
+
+<!-- ============================= CART DRAWER ============================= -->
+<div class="cart-overlay" id="cartOverlay"></div>
+<aside class="cart-drawer" id="cartDrawer">
+  <div class="cart-drawer__head">
+    <h3>سلة المشتريات</h3>
+    <button id="cartClose" aria-label="إغلاق السلة"><i class="fa-solid fa-xmark"></i></button>
+  </div>
+  <div class="cart-drawer__items" id="cartItems"></div>
+  <div class="cart-drawer__empty" id="cartEmptyState" hidden>
+    <i class="fa-solid fa-basket-shopping"></i>
+    <p>سلتك فاضية دلوقتي</p>
+    <a href="#/shop" class="btn btn--ghost" id="cartEmptyShopBtn">ابدئي التسوق</a>
+  </div>
+  <div class="cart-drawer__footer" id="cartFooter">
+    <div class="cart-drawer__total"><span>الإجمالي</span><span id="cartTotal">٠ ج.م</span></div>
+    <a href="#/checkout" class="btn btn--primary btn--full" id="goCheckoutBtn">إتمام الطلب</a>
+  </div>
+</aside>
+
+<!-- ============================= PRODUCT QUICK MODAL BACKDROP ============================= -->
+<div class="toast" id="toast"></div>
+
+<!-- ============================= FOOTER ============================= -->
+<footer class="footer">
+  <div class="container footer__inner">
+    <div class="footer__brand">
+      <div class="logo">
+        <span class="logo__mark">
+          <svg viewBox="0 0 60 60" class="logo__blob"><path d="M30 2C43 2 56 12 58 27C60 42 48 58 30 58C12 58 2 44 2 29C2 14 17 2 30 2Z"/></svg>
+          <span class="logo__initial">ح</span>
+        </span>
+        <span class="logo__word"><span class="logo__ar">حياه</span><span class="logo__en">HAYAH</span></span>
+      </div>
+      <p>متجرك العائلي لكل تفاصيل الحياه اليومية.</p>
+    </div>
+    <div class="footer__col">
+      <h4>روابط سريعة</h4>
+      <a href="#/">الرئيسية</a>
+      <a href="#/shop">المتجر</a>
+      <a href="#/track">تتبع الطلب</a>
+    </div>
+    <div class="footer__col">
+      <h4>خدمة العملاء</h4>
+      <a href="#">تواصلي معنا</a>
+    </div>
+    <div class="footer__col">
+      <h4>تابعينا</h4>
+      <div class="footer__social">
+        <a href="#" aria-label="فيسبوك"><i class="fa-brands fa-facebook-f"></i></a>
+      </div>
+    </div>
+  </div>
+  <div class="footer__bottom">© 2026 HAYAH — حياه.</div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="supabase.js"></script>
+<script src="main.js"></script>
+</body>
+</html>
