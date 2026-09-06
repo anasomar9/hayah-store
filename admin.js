@@ -435,9 +435,10 @@ async function editProduct(id) {
   $('#productModalTitle').textContent = 'تعديل المنتج';
   $('#prodId').value = p.id;
   $('#prodName').value = p.name_ar;
-
+  $('#prodSlug').value = p.slug;
   $('#prodDescription').value = p.description_ar || '';
   $('#prodCategory').value = p.category_id || '';
+  $('#prodSku').value = p.sku || '';
   $('#prodPrice').value = p.price;
   $('#prodComparePrice').value = p.compare_at_price || '';
   $('#prodStock').value = p.stock_quantity;
@@ -504,9 +505,10 @@ $('#productForm').addEventListener('submit', async (e) => {
 
   const payload = {
     name_ar: $('#prodName').value.trim(),
+    slug: $('#prodSlug').value.trim().toLowerCase().replace(/\s+/g, '-'),
     description_ar: $('#prodDescription').value.trim() || null,
     category_id: $('#prodCategory').value || null,
-  
+    sku: $('#prodSku').value.trim() || null,
     price: Number($('#prodPrice').value),
     compare_at_price: $('#prodComparePrice').value ? Number($('#prodComparePrice').value) : null,
     stock_quantity: Number($('#prodStock').value) || 0,
