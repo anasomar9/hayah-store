@@ -319,13 +319,11 @@ async function loadProductDetail(slug) {
         </div>
         <p class="product-detail__desc">${product.description_ar || ''}</p>
 
-        ${sizes.length ? `<div class="variant-group"><h4>المقاس</h4><div class="variant-options" id="sizeOptions">
-          ${sizes.map((s) => `<button class="variant-chip" data-size="${s}">${s}</button>`).join('')}
-        </div></div>` : ''}
-
         ${colors.length ? `<div class="variant-group"><h4>اللون</h4><div class="variant-options" id="colorOptions">
           ${colors.map((c) => `<button class="variant-chip" data-color="${c}">${c}</button>`).join('')}
         </div></div>` : ''}
+
+        ${sizes.length ? `<div class="variant-group"><h4>المقاس</h4><div class="variant-options" id="sizeOptions"></div></div>` : ''}
 
         <div class="qty-row">
           <div class="qty-control">
@@ -345,8 +343,35 @@ async function loadProductDetail(slug) {
     thumb.classList.add('is-active');
   }));
 
-  let selectedSize = sizes[0] || null;
   let selectedColor = colors[0] || null;
+  let selectedSize = null; // resolved below, depends on selectedColor
+
+  // Sizes available for a given color — this is the "each color has its own
+  // sizes" behavior: only sizes that actually exist for that color are shown.
+  function sizesForColor(color) {
+    if (!colors.length) return sizes; // no color grouping at all — show every size
+    return [...new Set(variants.filter((v) => v.color === color).map((v) => v.size).filter(Boolean))];
+  }
+
+  function renderSizeOptions() {
+    const sizeWrap = $('#sizeOptions');
+    if (!sizeWrap) return; // product has no sizes at all
+    const availableSizes = sizesForColor(selectedColor);
+    if (!selectedSize || !availableSizes.includes(selectedSize)) {
+      selectedSize = availableSizes[0] || null;
+    }
+    sizeWrap.innerHTML = availableSizes.map((s) =>
+      `<button class="variant-chip${s === selectedSize ? ' is-active' : ''}" data-size="${s}">${s}</button>`
+    ).join('');
+    $$('[data-size]', sizeWrap).forEach((btn) => {
+      btn.addEventListener('click', () => {
+        selectedSize = btn.dataset.size;
+        $$('[data-size]', sizeWrap).forEach((b) => b.classList.remove('is-active'));
+        btn.classList.add('is-active');
+        refreshVariantUI();
+      });
+    });
+  }
 
   function resolveVariant() {
     if (variants.length === 0) return null;
@@ -376,21 +401,13 @@ async function loadProductDetail(slug) {
     }
   }
 
-  $$('[data-size]', wrap).forEach((btn, i) => {
-    if (i === 0) btn.classList.add('is-active');
-    btn.addEventListener('click', () => {
-      selectedSize = btn.dataset.size;
-      $$('[data-size]', wrap).forEach((b) => b.classList.remove('is-active'));
-      btn.classList.add('is-active');
-      refreshVariantUI();
-    });
-  });
   $$('[data-color]', wrap).forEach((btn, i) => {
     if (i === 0) btn.classList.add('is-active');
     btn.addEventListener('click', () => {
       selectedColor = btn.dataset.color;
       $$('[data-color]', wrap).forEach((b) => b.classList.remove('is-active'));
       btn.classList.add('is-active');
+      renderSizeOptions(); // sizes shown depend on the newly selected color
       refreshVariantUI();
     });
   });
@@ -413,6 +430,7 @@ async function loadProductDetail(slug) {
     });
   });
 
+  renderSizeOptions();
   if (variants.length > 0) refreshVariantUI();
 }
 
@@ -478,8 +496,8 @@ function renderCheckoutSummary() {
 }
 
 const paymentInstructionsMap = {
-  vodafone_cash: 'حوّلي إجمالي المبلغ على رقم فودافون كاش: 01064934414 ثم اكتبي رقم العملية بالأسفل.',
-  instapay: 'حوّلي إجمالي المبلغ عبر إنستاباي إلى: 01127580708 ثم اكتبي رقم العملية بالأسفل.',
+  vodafone_cash: 'حوّلي إجمالي المبلغ على رقم فودافون كاش: 01000000000 ثم اكتبي رقم العملية بالأسفل.',
+  instapay: 'حوّلي إجمالي المبلغ عبر إنستاباي إلى: hayah@instapay ثم اكتبي رقم العملية بالأسفل.',
 };
 
 function updatePaymentInstructions() {
