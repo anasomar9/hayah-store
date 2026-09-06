@@ -496,8 +496,8 @@ function renderCheckoutSummary() {
 }
 
 const paymentInstructionsMap = {
-  vodafone_cash: 'حوّلي إجمالي المبلغ على رقم فودافون كاش: 01000000000 ثم اكتبي رقم العملية بالأسفل.',
-  instapay: 'حوّلي إجمالي المبلغ عبر إنستاباي إلى: hayah@instapay ثم اكتبي رقم العملية بالأسفل.',
+  vodafone_cash: 'حوّلي إجمالي المبلغ على رقم فودافون كاش: 01064934414 ثم اكتبي رقم العملية بالأسفل.',
+  instapay: 'حوّلي إجمالي المبلغ عبر إنستاباي إلى: 01127580708 ثم اكتبي رقم العملية بالأسفل.',
 };
 
 function updatePaymentInstructions() {
